@@ -1,8 +1,12 @@
 import telebot, random
 from telebot import types
 from time import sleep
+import os
+PORT = int(os.environ.get('PORT', 5000))
 
-bot = telebot.TeleBot('1922118154:AAGTrDR4jtfP7rEhszhQ4BsQWVNKpDj0Hpg', parse_mode='MarkdownV2')
+TOKEN='1922118154:AAGTrDR4jtfP7rEhszhQ4BsQWVNKpDj0Hpg'
+
+bot = telebot.TeleBot(TOKEN, parse_mode='MarkdownV2')
 print("Bot started successfully! Running now...")
 user = bot.get_me()
 
@@ -73,4 +77,8 @@ def hi_msg(message):
     else:
         bot.send_message(cid, "I don't get it what you mean:/")
 
-bot.infinity_polling()
+        
+updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=TOKEN)
+updater.bot.setWebhook('https://advik143.herokuapp.com/' + TOKEN)
