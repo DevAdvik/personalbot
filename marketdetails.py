@@ -77,3 +77,4 @@ mdet10 = str("10. "+name10+"("+symbol10+"): $"+priceusd10+" ("+pricechange10+"%)
 
 marketdetails = mdet1+'\n'+mdet2+'\n'+mdet3+'\n'+mdet4+'\n'+mdet5+'\n'+mdet6+'\n'+mdet7+'\n'+mdet8+'\n'+mdet9+'\n'+mdet10
 #marketdetails variable now hold info about Top10 Crypto Currencies
+return marketdetails
