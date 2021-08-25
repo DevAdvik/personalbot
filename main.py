@@ -55,6 +55,16 @@ def all_cmds(message):
 @bot.message_handler(commands=['qr'])
 def qrcoded(message):
     m = message.chat.id
+    msg = message.text
+    if len(msg)>4:
+        msg = msg[3:]
+        img = qrcode.make(msg)
+        img.save('qrcode.png')
+        qr = open('qrcode.png', 'rb')
+        bot.send_photo(m, qr, caption="Here's the QR Code!")
+        qr.close()
+    else:
+        bot.reply_to(message, "Dude, where's the text?")
 
 
 @bot.message_handler(content_types=['location'])
