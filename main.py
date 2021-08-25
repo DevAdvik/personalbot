@@ -87,4 +87,8 @@ def hi_msg(message):
         bot.send_message(cid, "Ciao bruh!")
 
 
-bot.polling()
+while True:
+    try:
+        bot.polling()
+    except:
+        sleep(1)
