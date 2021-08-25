@@ -1,4 +1,4 @@
-import telebot, random
+import telebot, request, qrcode
 from telebot import types
 from time import sleep
 import marketindex as mi
@@ -21,6 +21,7 @@ def newmsg(messages):
 
 bot.set_update_listener(newmsg) #Turns on listener
 
+
 @bot.message_handler(commands=['start'])
 def wlcm_msg(message):
     cid = (message.chat.id)
@@ -37,15 +38,13 @@ def wlcm_msg(message):
     else:
         bot.send_message(cid, 'Heya ' + message.from_user.first_name + ', Welcome again!')
 
-@bot.message_handler(commands=['anime', 'animes'])
-def animes_list(message):
-    bot.reply_to(message, "List of good animes to watch:\nBlack clover, fire force, one piece, the duke of death and his maid, girlfriend girlfriend , JoJo \(if you haven't watched it\) , mob psycho 100 , one punch man , the rising of the shield hero , konosuba , that time i got reincarnated as a slime , slime diaries , grand blue , love chunibyo and other delusions , free\!dive , burning kabaddi , clean freak aoyama kun , haikyuu\nHava Nice day\!")
-
+        
 @bot.message_handler(commands=['top10'])
 def index(message):
     cid = message.chat.id
     bot.send_message(cid, mi.getinfo())
 
+    
 @bot.message_handler(commands=['help'])
 def all_cmds(message):
     bot.send_message(message.from_user.id, """🔰 *Following features:*
@@ -53,13 +52,10 @@ def all_cmds(message):
 2. Market Index - /top10 Get top 10 Cryptos by their market cap
 3. More features being added;)""")
     
-    #Test feature, to be taken care later..
-    '''mrkp = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-    btn1 = types.KeyboardButton('Hi')
-    btn2 = types.KeyboardButton('Who tf are you?')
-    mrkp.row(btn1, btn2)
-    bot.send_message(message.from_user.id, "Click one!", reply_markup=mrkp)
-    hideboard = types.ReplyKeyboardRemove()'''
+@bot.message_handler(commands=['qr'])
+def qrcoded(message):
+    m = message.chat.id
+
 
 @bot.message_handler(content_types=['location'])
 def doc_msg(message):
