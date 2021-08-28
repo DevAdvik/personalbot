@@ -10,6 +10,7 @@ Required modules installation:
 - pyTelegrambotAPI
 - Pillow
 - qrcode
+- pyshorteners
 
 ```
 pip install requests
@@ -22,4 +23,7 @@ pip install Pillow
 ```
 ```
 pip install qrcode
+```
+```
+pip install pyshorteners
 ```
