@@ -2,6 +2,7 @@ import telebot, request, qrcode
 from telebot import types
 from time import sleep
 import marketindex as mi
+from shorturls import shortener
 
 bot = telebot.TeleBot('1922118154:AAGTrDR4jtfP7rEhszhQ4BsQWVNKpDj0Hpg', parse_mode='HTML')
 print("Bot started successfully! Running now...")
@@ -65,6 +66,12 @@ def qrcoded(message):
         qr.close()
     else:
         bot.reply_to(message, "Dude, where's the text?")
+        
+
+@bot.message_handler(commands=['urlshort'])
+def shortit(message):
+    m = message.chat.id
+    bot.send_message(m, shortener())
 
 
 @bot.message_handler(content_types=['location'])
