@@ -1,56 +1,54 @@
-import random
+import random, os
 import pyshorteners as ps
 
+bitly = os.environ['bitly']
+cuttly = os.environ['cuttly']
 
-def shortener():
-    link = input("Enter the link you wanna shorten: ")
+
+def shortener(link):
     try:
         if link.startswith('https://') or link.startswith('http://'):
             services = ["bitly", 'cuttly',  'tinyurl', 'dagd', 'isgd' , 'chilpit']
             service = random.choice(services)
             if service == 'bitly':
-                url = ps.Shortener(api_key='46f5c8eff800e1d3277e8bb35bbe283776d97d9a')
+                url = ps.Shortener(api_key=bitly)
                 shorturl = url.bitly.short(link)
-                print(shorturl)
+                return shorturl
             if service == 'cuttly':
-                url = ps.Shortener(api_key='f2dabc59748765cb87ce73a3ca556fb337253')
+                url = ps.Shortener(api_key=cuttly)
                 shorturl = url.cuttly.short(link)
-                print(shorturl)
+                return shorturl
             elif service == 'tinyurl':
                 url = ps.Shortener()
                 shorturl = url.tinyurl.short(link)
-                print(shorturl)
+                return shorturl
             elif service == 'dagd':
                 url = ps.Shortener()
                 shorturl = url.dagd.short(link)
-                print(shorturl)
+                return shorturl
             elif service == 'isgd':
                 url = ps.Shortener()
                 shorturl = url.isgd.short(link)
-                print(shorturl)
+                return shorturl
             elif service == 'chilpit':
                 url = ps.Shortener()
                 shorturl = url.chilpit.short(link)
-                print(shorturl)
+                return shorturl
             else:
-                print("Oops...") #Unnecessary line, but looks good!
+                return "Oops..." #Unnecessary line, but looks good!
         else:
-            print("Invalid Link! Make sure the link starts with https:// or http://")
-            shortener()
+            return "Invalid Link! Make sure the link starts with https:// or http://"
+            
     except ps.exceptions.ShorteningErrorException:
-        print("Error Occured! Most likely invalid URL format or server-side error, please try again.")
-        shortener()
+        return "Error Occured! Most likely invalid URL format or server-side error, please try again."
     except ps.exceptions.BadURLException:
-        print("Invalid URL Format!")
-        shortener()
+        return "Invalid URL Format!"
     except ps.exceptions.BadAPIResponseException:
         try:
-            url = ps.Shortener(api_key='46f5c8eff800e1d3277e8bb35bbe283776d97d9a')
+            url = ps.Shortener(api_key=bitly)
             shorturl = url.bitly.short(link)
-            print(shorturl)
+            return shorturl
         except ps.exceptions.BadAPIResponseException:
-            print("Server-error! Please retry")
-            shortener()
-    
-
-shortener()
+            return "Server-error! Please retry"
+            
+#ignore
