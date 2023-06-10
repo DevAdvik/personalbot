@@ -1,4 +1,4 @@
-# advik_143bot
+# DevAdvikBot
 
 A more featured TG bot I made, features are added regularl!
 
